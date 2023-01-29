@@ -2,11 +2,11 @@ package gom
 
 import (
 	"fmt"
-	"testgom"
+	"github.com/zngzlg/testgom"
 )
 
 func Hello() {
 	fmt.Println("hello")
 	fmt.Println("world")
-
+        testgom.TestGom()
 }
