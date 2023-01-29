@@ -5,8 +5,9 @@ import (
 	"github.com/zngzlg/gom/testgom"
 )
 
-func Hello() {
+func Hello() bool {
 	fmt.Println("hello")
 	fmt.Println("world")
         testgom.TestGom()
+	return true
 }
