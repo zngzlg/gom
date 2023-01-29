@@ -1,8 +1,12 @@
-package test
+package gom
 
-import "fmt"
+import (
+	"fmt"
+	"testgom"
+)
 
 func Hello() {
 	fmt.Println("hello")
 	fmt.Println("world")
+
 }
