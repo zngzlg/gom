@@ -2,7 +2,7 @@ package gom
 
 import (
 	"fmt"
-	"github.com/zngzlg/testgom"
+	"github.com/zngzlg/gom/testgom"
 )
 
 func Hello() {
