@@ -9,3 +9,11 @@ func TestHello(t *testing.T) {
 		t.Errorf(" invalid")
 	}
 }
+
+func TestCreate(t *testing.T) {
+	t.Log("into test Create")
+	result := Create()
+	if result != true {
+		t.Errorf(" invalid")
+	}
+}

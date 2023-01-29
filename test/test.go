@@ -1,4 +1,4 @@
-package testgom
+package test
 
 import "fmt"
 
