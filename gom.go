@@ -6,6 +6,9 @@ import (
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"time"
+	"net/http"
+	"log"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func Hello() bool {
@@ -44,4 +47,9 @@ func Create() bool {
 	db.AutoMigrate(&UserInfoExp{})
 	db.Create(&userInfoExp)
 	return true
+}
+
+func Metrics() {
+	http.Handle("/metrics", promhttp.Handler())
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

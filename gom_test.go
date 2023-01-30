@@ -17,3 +17,9 @@ func TestCreate(t *testing.T) {
 		t.Errorf(" invalid")
 	}
 }
+
+func TestMetrics(t *testing.T) {
+	t.Log("into test metrics")
+	Metrics()
+}
+
