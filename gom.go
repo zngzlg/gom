@@ -2,10 +2,10 @@ package gom
 
 import (
 	"fmt"
-	"time"
 	"github.com/zngzlg/gom/test"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"time"
 )
 
 func Hello() bool {
@@ -15,23 +15,33 @@ func Hello() bool {
 }
 
 type UserInfo struct {
-	ID		uint		`gorm:"PrimaryKey"`
-	Name	string		`gorm:"index"`
+	ID   uint   `gorm:"primaryKey"`
+	Name string `gorm:"index"`
 }
 
 type UserInfoExp struct {
-	UserInfo UserInfo	`gorm:"embedded"`
-	Create time.Time 	`gorm:"autoCreateTime"`
+	UserInfo UserInfo  `gorm:"embedded"`
+	Create   time.Time `gorm:"autoCreateTime"`
 }
 
 func Create() bool {
-  	db, err := gorm.Open(sqlite.Open("user.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("user.db"), &gorm.Config{})
 	if err != nil {
 		panic("error when init db")
 	}
-	userInfo := UserInfo{Name:"zzl"}
-	userInfoExp := UserInfoExp{UserInfo:userInfo}
+	// db pool config
+	sqlDB, err := db.DB()
+	sqlDB.SetMaxIdleConns(1)
+	sqlDB.SetMaxOpenConns(2)
+	sqlDB.SetConnMaxLifetime(time.Hour)
 
+	userInfo := UserInfo{Name: "zzl"}
+	userInfoExp := UserInfoExp{UserInfo: userInfo}
+
+	// sync schema first
+	db.AutoMigrate(&UserInfo{})
 	db.Create(&userInfo)
+	db.AutoMigrate(&UserInfoExp{})
+	db.Create(&userInfoExp)
 	return true
 }
