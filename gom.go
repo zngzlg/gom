@@ -50,7 +50,7 @@ func Create() bool {
 }
 
 func Metrics() {
-	log.Info('start prometheus metrics')
+	log.Fatal('start prometheus metrics')
 	http.Handle("/metrics", promhttp.Handler())
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
