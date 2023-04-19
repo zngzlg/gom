@@ -2,7 +2,6 @@ package gom
 
 import (
 	"fmt"
-	"github.com/zngzlg/gom/test"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"time"
@@ -13,7 +12,6 @@ import (
 
 func Hello() bool {
 	fmt.Println("hello world")
-	test.TestGom()
 	return true
 }
 
@@ -50,7 +48,7 @@ func Create() bool {
 }
 
 func Metrics() {
-	log.Fatal("start prometheus metrics")
+	log.Printf("start prometheus metrics")
 	http.Handle("/metrics", promhttp.Handler())
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
